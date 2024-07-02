@@ -6,6 +6,9 @@ class StringCalculator
 {
     public function add($string): int
     {
-        return 0;
+        if (empty($string)){
+            return 0;
+        }
+        return $string;
     }
 }

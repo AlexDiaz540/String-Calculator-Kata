@@ -12,11 +12,11 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function add()
+    public function addWhenStringIsEmpty()
     {
         $stringCalculator = new StringCalculator();
 
         $result = $stringCalculator->add("");
-        $this->assertEquals(1, $result);
+        $this->assertEquals(0, $result);
     }
 }
