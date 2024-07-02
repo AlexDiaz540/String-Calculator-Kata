@@ -52,4 +52,15 @@ final class StringCalculatorTest extends TestCase
         $result = $stringCalculator->add("1,2,3");
         $this->assertEquals(6, $result);
     }
+
+    /**
+     * @test
+     */
+    public function addWithLineBreak()
+    {
+        $stringCalculator = new StringCalculator();
+        $result = $stringCalculator->add("1\n2,3");
+
+        $this->assertEquals(6, $result);
+    }
 }
