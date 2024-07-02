@@ -9,6 +9,7 @@ class StringCalculator
         if (empty($string)){
             return 0;
         }
+
         return $string;
     }
 }

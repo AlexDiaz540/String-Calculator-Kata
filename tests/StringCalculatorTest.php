@@ -19,4 +19,15 @@ final class StringCalculatorTest extends TestCase
         $result = $stringCalculator->add("");
         $this->assertEquals(0, $result);
     }
+
+    /**
+     * @test
+     */
+    public function addWhithOneParameter()
+    {
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("1");
+        $this->assertEquals(0, $result);
+    }
 }
