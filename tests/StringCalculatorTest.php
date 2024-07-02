@@ -41,4 +41,15 @@ final class StringCalculatorTest extends TestCase
          $result = $stringCalculator->add("1,2");
          $this->assertEquals(3, $result);
     }
+
+    /**
+     * @test
+     */
+    public function addWithAnyParameters()
+    {
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("1,2,3");
+        $this->assertEquals(6, $result);
+    }
 }
