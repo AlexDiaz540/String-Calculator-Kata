@@ -10,6 +10,12 @@ class StringCalculator
             return 0;
         }
 
-        return (int)$string;
+        if (strlen($string) == 1)
+        {
+            return (int)$string;
+        }
+
+        $partes = explode(",", $string);
+        return (int)$partes[0] + (int)$partes[1];
     }
 }

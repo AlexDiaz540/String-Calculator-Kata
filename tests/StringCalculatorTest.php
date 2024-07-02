@@ -39,6 +39,6 @@ final class StringCalculatorTest extends TestCase
          $stringCalculator = new StringCalculator();
 
          $result = $stringCalculator->add("1,2");
-         $this->assertEquals(0, $result);
+         $this->assertEquals(3, $result);
     }
 }
