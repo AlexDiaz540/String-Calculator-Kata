@@ -28,6 +28,6 @@ final class StringCalculatorTest extends TestCase
         $stringCalculator = new StringCalculator();
 
         $result = $stringCalculator->add("1");
-        $this->assertEquals(0, $result);
+        $this->assertEquals(1, $result);
     }
 }

@@ -10,6 +10,6 @@ class StringCalculator
             return 0;
         }
 
-        return $string;
+        return (int)$string;
     }
 }
