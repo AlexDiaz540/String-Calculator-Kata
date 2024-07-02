@@ -15,6 +15,7 @@ class StringCalculator
             return (int)$string;
         }
 
+        $string = str_replace("\n", ',', $string);
         $numbersArray = explode(",", $string);
         $total = 0;
         foreach ($numbersArray as $numberString) {
