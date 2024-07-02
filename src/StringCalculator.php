@@ -16,6 +16,11 @@ class StringCalculator
         }
 
         $partes = explode(",", $string);
-        return (int)$partes[0] + (int)$partes[1];
+        $total = 0;
+        foreach ($partes as $numero) {
+            $total += (int)$numero;
+        }
+
+        return $total;
     }
 }
