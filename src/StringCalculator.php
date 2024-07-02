@@ -10,17 +10,22 @@ class StringCalculator
             return 0;
         }
 
-        if (strlen($string) == 1)
+        if ($this->isOneParameter($string))
         {
             return (int)$string;
         }
 
-        $partes = explode(",", $string);
+        $numbersArray = explode(",", $string);
         $total = 0;
-        foreach ($partes as $numero) {
-            $total += (int)$numero;
+        foreach ($numbersArray as $numberString) {
+            $total += (int)$numberString;
         }
 
         return $total;
+    }
+
+    public function isOneParameter($string): bool
+    {
+        return strlen($string) == 1;
     }
 }
