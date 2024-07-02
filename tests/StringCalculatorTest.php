@@ -30,4 +30,15 @@ final class StringCalculatorTest extends TestCase
         $result = $stringCalculator->add("1");
         $this->assertEquals(1, $result);
     }
+
+    /**
+     * @test
+     */
+    public function addWithTwoParameters()
+    {
+         $stringCalculator = new StringCalculator();
+
+         $result = $stringCalculator->add("1,2");
+         $this->assertEquals(0, $result);
+    }
 }
