@@ -12,13 +12,9 @@ class StringCalculator
             return 0;
         }
 
-        if ($this->isOneParameter($string))
+        if ($this->oneParameterReceived($string))
         {
-            $number = (int)$string;
-            if($this->isNegative($number)){
-                throw new RuntimeException('Number must be positive');
-            }
-            return ($number > 1000) ? 0:$number;
+            return $this->addWithOneParameter($string);
         }
 
         if(str_starts_with($string, "//")){
@@ -46,7 +42,7 @@ class StringCalculator
         return $total;
     }
 
-    public function isOneParameter($string): bool
+    public function oneParameterReceived($string): bool
     {
         return count(explode(",", $string)) === 1 && !str_starts_with($string, "//");
     }
@@ -55,5 +51,14 @@ class StringCalculator
     {
 
         return $number < 0;
+    }
+
+    public function addWithOneParameter($string): int
+    {
+        $number = (int)$string;
+        if ($this->isNegative($number)) {
+            throw new RuntimeException('Number must be positive');
+        }
+        return ($number > 1000) ? 0 : $number;
     }
 }
