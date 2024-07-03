@@ -15,7 +15,7 @@ class StringCalculator
         if ($this->isOneParameter($string))
         {
             $number = (int)$string;
-            if($number < 0){
+            if($this->isNegative($number)){
                 throw new RuntimeException('Number must be positive');
             }
             return $number;
@@ -32,7 +32,7 @@ class StringCalculator
         $total = 0;
         foreach ($numbersArray as $numberString) {
             $number = (int)$numberString;
-            if ($number < 0){
+            if ($this->isNegative($number)){
                 throw new RuntimeException('Number must be positive');
             }
             $total += $number;
@@ -44,5 +44,10 @@ class StringCalculator
     public function isOneParameter($string): bool
     {
         return strlen($string) == 1 || strlen($string) == 2;
+    }
+
+    public function isNegative(int $number): bool
+    {
+        return $number < 0;
     }
 }
