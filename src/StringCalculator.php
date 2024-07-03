@@ -21,18 +21,7 @@ class StringCalculator
             $string = $this->replaceDelimiters($string);
         }
 
-        $string = str_replace("\n", ',', $string);
-        $numbersArray = explode(",", $string);
-        $total = 0;
-        foreach ($numbersArray as $numberString) {
-            $number = (int)$numberString;
-            if ($this->isNegative($number)){
-                throw new RuntimeException('Number must be positive');
-            }
-            $total += ($number > 1000) ? 0:$number;
-        }
-
-        return $total;
+        return $this->addWithTwoOrMoreParameters($string);
     }
 
     public function oneParameterReceived($string): bool
@@ -42,7 +31,6 @@ class StringCalculator
 
     public function isNegative(int $number): bool
     {
-
         return $number < 0;
     }
 
@@ -60,10 +48,6 @@ class StringCalculator
         return str_starts_with($string, "//");
     }
 
-    /**
-     * @param $string
-     * @return array|string|string[]
-     */
     public function replaceDelimiters($string): string|array
     {
         $position = strpos($string, "\n");
@@ -75,5 +59,20 @@ class StringCalculator
             $string = str_replace($delimiter, ',', $string);
         }
         return $string;
+    }
+
+    public function addWithTwoOrMoreParameters(mixed $string): int
+    {
+        $string = str_replace("\n", ',', $string);
+        $numbersArray = explode(",", $string);
+        $total = 0;
+        foreach ($numbersArray as $numberString) {
+            $number = (int)$numberString;
+            if ($this->isNegative($number)) {
+                throw new RuntimeException('Number must be positive');
+            }
+            $total += ($number > 1000) ? 0 : $number;
+        }
+        return $total;
     }
 }
