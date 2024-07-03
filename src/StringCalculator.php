@@ -18,8 +18,7 @@ class StringCalculator
             if($this->isNegative($number)){
                 throw new RuntimeException('Number must be positive');
             }
-            $number = ($number > 1000) ? 0:$number;
-            return $number;
+            return ($number > 1000) ? 0:$number;
         }
 
         if(str_starts_with($string, "//")){
@@ -36,7 +35,7 @@ class StringCalculator
             if ($this->isNegative($number)){
                 throw new RuntimeException('Number must be positive');
             }
-            $total += $number;
+            $total += ($number > 1000) ? 0:$number;
         }
 
         return $total;
