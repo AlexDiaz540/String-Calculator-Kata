@@ -22,7 +22,9 @@ class StringCalculator
         }
 
         if(str_starts_with($string, "//")){
-            $delimiter = substr($string, 2, 1);
+            $position = strpos($string, "\n");
+            $delimiter = substr($string, 2, $position - 2);
+            $delimiter = str_replace(['[', ']'], '', $delimiter);
             $string = explode("\n", $string);
             $string = str_replace($delimiter, ',', $string[1]);
         }
