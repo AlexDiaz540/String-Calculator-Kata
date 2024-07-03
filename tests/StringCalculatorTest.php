@@ -74,4 +74,15 @@ final class StringCalculatorTest extends TestCase
         $result = $stringCalculator->add("//;\n1;2;3");
         $this->assertEquals(6, $result);
     }
+
+    /**
+     * @test
+     */
+    public function addShouldReciveExceptionWithNegatives()
+    {
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("-1");
+        $this->assertEquals(0, $result);
+    }
 }
