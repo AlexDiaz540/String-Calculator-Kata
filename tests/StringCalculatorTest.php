@@ -6,6 +6,7 @@ namespace Deg540\StringCalculatorPHP\Test;
 
 use Deg540\StringCalculatorPHP\StringCalculator;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 final class StringCalculatorTest extends TestCase
 {
@@ -82,7 +83,7 @@ final class StringCalculatorTest extends TestCase
     {
         $stringCalculator = new StringCalculator();
 
-        $result = $stringCalculator->add("-1");
-        $this->assertEquals(0, $result);
+        $this->expectException(RuntimeException::class);
+        $result = $stringCalculator->add("//;\n1;-2;3");
     }
 }

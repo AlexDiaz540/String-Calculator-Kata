@@ -2,6 +2,8 @@
 
 namespace Deg540\StringCalculatorPHP;
 
+use RuntimeException;
+
 class StringCalculator
 {
     public function add($string): int
@@ -12,7 +14,11 @@ class StringCalculator
 
         if ($this->isOneParameter($string))
         {
-            return (int)$string;
+            $number = (int)$string;
+            if($number < 0){
+                throw new RuntimeException('Number must be positive');
+            }
+            return $number;
         }
 
         if(str_starts_with($string, "//")){
@@ -25,7 +31,11 @@ class StringCalculator
         $numbersArray = explode(",", $string);
         $total = 0;
         foreach ($numbersArray as $numberString) {
-            $total += (int)$numberString;
+            $number = (int)$numberString;
+            if ($number < 0){
+                throw new RuntimeException('Number must be positive');
+            }
+            $total += $number;
         }
 
         return $total;
@@ -33,6 +43,6 @@ class StringCalculator
 
     public function isOneParameter($string): bool
     {
-        return strlen($string) == 1;
+        return strlen($string) == 1 || strlen($string) == 2;
     }
 }
