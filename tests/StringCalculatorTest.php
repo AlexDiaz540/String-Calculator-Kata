@@ -86,4 +86,14 @@ final class StringCalculatorTest extends TestCase
         $this->expectException(RuntimeException::class);
         $result = $stringCalculator->add("//;\n1;-2;3");
     }
+
+    /**
+     * @test
+     */
+    public function addWithNumbersHigherThan1000(){
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("100000");
+        $this->assertEquals(1, $result);
+    }
 }
