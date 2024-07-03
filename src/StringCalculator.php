@@ -25,8 +25,11 @@ class StringCalculator
             $position = strpos($string, "\n");
             $delimiter = substr($string, 2, $position - 2);
             $delimiter = str_replace(['[', ']'], '', $delimiter);
-            $string = explode("\n", $string);
-            $string = str_replace($delimiter, ',', $string[1]);
+            $delimiters = str_split($delimiter);
+            $string = explode("\n", $string)[1];
+            foreach ($delimiters as $delimiter) {
+                $string = str_replace($delimiter, ',', $string);
+            }
         }
 
         $string = str_replace("\n", ',', $string);
