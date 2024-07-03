@@ -18,6 +18,7 @@ class StringCalculator
             if($this->isNegative($number)){
                 throw new RuntimeException('Number must be positive');
             }
+            $number = ($number > 1000) ? 0:$number;
             return $number;
         }
 
@@ -43,11 +44,12 @@ class StringCalculator
 
     public function isOneParameter($string): bool
     {
-        return strlen($string) == 1 || strlen($string) == 2;
+        return count(explode(",", $string)) === 1 && !str_starts_with($string, "//");
     }
 
     public function isNegative(int $number): bool
     {
+
         return $number < 0;
     }
 }

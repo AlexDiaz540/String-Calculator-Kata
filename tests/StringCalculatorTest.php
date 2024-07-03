@@ -93,7 +93,7 @@ final class StringCalculatorTest extends TestCase
     public function addWithNumbersHigherThan1000(){
         $stringCalculator = new StringCalculator();
 
-        $result = $stringCalculator->add("100000");
-        $this->assertEquals(1, $result);
+        $result = $stringCalculator->add("1001");
+        $this->assertEquals(0, $result);
     }
 }
