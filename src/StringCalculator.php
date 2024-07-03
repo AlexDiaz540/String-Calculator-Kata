@@ -15,6 +15,12 @@ class StringCalculator
             return (int)$string;
         }
 
+        if(str_starts_with($string, "//")){
+            $delimiter = substr($string, 2, 1);
+            $string = explode("\n", $string);
+            $string = str_replace($delimiter, ',', $string[1]);
+        }
+
         $string = str_replace("\n", ',', $string);
         $numbersArray = explode(",", $string);
         $total = 0;

@@ -71,7 +71,7 @@ final class StringCalculatorTest extends TestCase
     {
         $stringCalculator = new StringCalculator();
 
-        $result = $stringCalculator->add("//;\n1;2,;3");
+        $result = $stringCalculator->add("//;\n1;2;3");
         $this->assertEquals(6, $result);
     }
 }
