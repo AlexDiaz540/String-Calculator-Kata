@@ -108,4 +108,15 @@ final class StringCalculatorTest extends TestCase
         $result = $stringCalculator->add("//[;]\n1;2;3");
         $this->assertEquals(6, $result);
     }
+
+    /**
+     * @test
+     */
+    public function addWithMultipleDelimiters()
+    {
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("//[*][%]\n1*2%3");
+        $this->assertEquals(6, $result);
+    }
 }
