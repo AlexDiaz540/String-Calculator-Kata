@@ -17,15 +17,8 @@ class StringCalculator
             return $this->addWithOneParameter($string);
         }
 
-        if(str_starts_with($string, "//")){
-            $position = strpos($string, "\n");
-            $delimiter = substr($string, 2, $position - 2);
-            $delimiter = str_replace(['[', ']'], '', $delimiter);
-            $delimiters = str_split($delimiter);
-            $string = explode("\n", $string)[1];
-            foreach ($delimiters as $delimiter) {
-                $string = str_replace($delimiter, ',', $string);
-            }
+        if($this->hasDelimiters($string)){
+            $string = $this->replaceDelimiters($string);
         }
 
         $string = str_replace("\n", ',', $string);
@@ -44,7 +37,7 @@ class StringCalculator
 
     public function oneParameterReceived($string): bool
     {
-        return count(explode(",", $string)) === 1 && !str_starts_with($string, "//");
+        return count(explode(",", $string)) === 1 && !$this->hasDelimiters($string);
     }
 
     public function isNegative(int $number): bool
@@ -60,5 +53,27 @@ class StringCalculator
             throw new RuntimeException('Number must be positive');
         }
         return ($number > 1000) ? 0 : $number;
+    }
+
+    public function hasDelimiters($string): bool
+    {
+        return str_starts_with($string, "//");
+    }
+
+    /**
+     * @param $string
+     * @return array|string|string[]
+     */
+    public function replaceDelimiters($string): string|array
+    {
+        $position = strpos($string, "\n");
+        $delimiter = substr($string, 2, $position - 2);
+        $delimiter = str_replace(['[', ']'], '', $delimiter);
+        $delimiters = str_split($delimiter);
+        $string = explode("\n", $string)[1];
+        foreach ($delimiters as $delimiter) {
+            $string = str_replace($delimiter, ',', $string);
+        }
+        return $string;
     }
 }
