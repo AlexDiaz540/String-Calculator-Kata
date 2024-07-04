@@ -10,14 +10,17 @@ use RuntimeException;
 
 final class StringCalculatorTest extends TestCase
 {
+    private StringCalculator $stringCalculator;
+    protected function setUp(): void
+    {
+        $this->stringCalculator = new StringCalculator();
+    }
     /**
      * @test
      */
     public function addWhenStringIsEmpty()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("");
+        $result = $this->stringCalculator->add("");
         $this->assertEquals(0, $result);
     }
 
@@ -26,9 +29,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWhithOneParameter()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("1");
+        $result = $this->stringCalculator->add("1");
         $this->assertEquals(1, $result);
     }
 
@@ -37,9 +38,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithTwoParameters()
     {
-         $stringCalculator = new StringCalculator();
-
-         $result = $stringCalculator->add("1,2");
+         $result = $this->stringCalculator->add("1,2");
          $this->assertEquals(3, $result);
     }
 
@@ -48,9 +47,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithAnyParameters()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("1,2,3");
+        $result = $this->stringCalculator->add("1,2,3");
         $this->assertEquals(6, $result);
     }
 
@@ -59,9 +56,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithLineBreak()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("1\n2,3");
+        $result = $this->stringCalculator->add("1\n2,3");
         $this->assertEquals(6, $result);
     }
 
@@ -70,9 +65,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithDifferentDelimiters()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("//;\n1;2;3");
+        $result = $this->stringCalculator->add("//;\n1;2;3");
         $this->assertEquals(6, $result);
     }
 
@@ -81,10 +74,8 @@ final class StringCalculatorTest extends TestCase
      */
     public function addShouldReciveExceptionWithOneNegativeParameter()
     {
-        $stringCalculator = new StringCalculator();
-
         $this->expectException(RuntimeException::class);
-        $result = $stringCalculator->add("//;\n1;-2;3");
+        $result = $this->stringCalculator->add("//;\n1;-2;3");
     }
 
     /**
@@ -92,10 +83,8 @@ final class StringCalculatorTest extends TestCase
      */
     public function addShouldReciveExceptionWithAnyNegativesParameters()
     {
-        $stringCalculator = new StringCalculator();
-
         $this->expectException(RuntimeException::class);
-        $result = $stringCalculator->add("//;\n1;-2;3");
+        $result = $this->stringCalculator->add("//;\n1;-2;3");
     }
 
     /**
@@ -103,9 +92,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithOneParameterHigherThan1000()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("1001");
+        $result = $this->stringCalculator->add("1001");
         $this->assertEquals(0, $result);
     }
 
@@ -114,9 +101,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithParametersHigherThan1000()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("//;\n1;1001;3000");
+        $result = $this->stringCalculator->add("//;\n1;1001;3000");
         $this->assertEquals(1, $result);
     }
 
@@ -125,9 +110,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithAnyLengthDelimiter()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("//[;;]\n1;;2;;3");
+        $result = $this->stringCalculator->add("//[;;]\n1;;2;;3");
         $this->assertEquals(6, $result);
     }
 
@@ -136,9 +119,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithMultipleDelimiters()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("//[**][%]\n1*2%3");
+        $result = $this->stringCalculator->add("//[**][%]\n1*2%3");
         $this->assertEquals(6, $result);
     }
 
@@ -147,9 +128,7 @@ final class StringCalculatorTest extends TestCase
      */
     public function addWithMultipleDelimitersAndParameterHigherThan1000()
     {
-        $stringCalculator = new StringCalculator();
-
-        $result = $stringCalculator->add("//[**][%]\n1**2000%3");
+        $result = $this->stringCalculator->add("//[**][%]\n1**2000%3");
         $this->assertEquals(4, $result);
     }
 }
