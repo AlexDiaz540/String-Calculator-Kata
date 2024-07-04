@@ -48,23 +48,23 @@ class StringCalculator
         return str_starts_with($string, "//");
     }
 
-    public function replaceDelimiters($string): string|array
+    public function replaceDelimiters($inputGiven): string|array
     {
-        $position = strpos($string, "\n");
-        $delimiter = substr($string, 2, $position - 2);
-        $delimiter = str_replace(['[', ']'], '', $delimiter);
-        $delimiters = str_split($delimiter);
-        $string = explode("\n", $string)[1];
-        foreach ($delimiters as $delimiter) {
-            $string = str_replace($delimiter, ',', $string);
+        $lineBreakPosition = strpos($inputGiven, "\n");
+        $delimiters = substr($inputGiven, 2, $lineBreakPosition - 2);
+        $delimiters = str_replace(['[', ']'], '', $delimiters);
+        $delimitersArray = str_split($delimiters);
+        $parameters = explode("\n", $inputGiven)[1];
+        foreach ($delimitersArray as $delimiter) {
+            $parameters = str_replace($delimiter, ',', $parameters);
         }
-        return $string;
+        return $parameters;
     }
 
-    public function addWithTwoOrMoreParameters(mixed $string): int
+    public function addWithTwoOrMoreParameters(mixed $inputGiven): int
     {
-        $string = str_replace("\n", ',', $string);
-        $numbersArray = explode(",", $string);
+        $inputGiven = str_replace("\n", ',', $inputGiven);
+        $numbersArray = explode(",", $inputGiven);
         $total = 0;
         foreach ($numbersArray as $numberString) {
             $number = (int)$numberString;
