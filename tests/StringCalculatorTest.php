@@ -79,7 +79,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addShouldReciveExceptionWithNegatives()
+    public function addShouldReciveExceptionWithOneNegativeParameter()
     {
         $stringCalculator = new StringCalculator();
 
@@ -90,12 +90,34 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithNumbersHigherThan1000()
+    public function addShouldReciveExceptionWithAnyNegativesParameters()
     {
         $stringCalculator = new StringCalculator();
 
-        $result = $stringCalculator->add("//;\n1;1001;3");
-        $this->assertEquals(4, $result);
+        $this->expectException(RuntimeException::class);
+        $result = $stringCalculator->add("//;\n1;-2;3");
+    }
+
+    /**
+     * @test
+     */
+    public function addWithOneParameterHigherThan1000()
+    {
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("1001");
+        $this->assertEquals(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function addWithParametersHigherThan1000()
+    {
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("//;\n1;1001;3000");
+        $this->assertEquals(1, $result);
     }
 
     /**
@@ -105,7 +127,7 @@ final class StringCalculatorTest extends TestCase
     {
         $stringCalculator = new StringCalculator();
 
-        $result = $stringCalculator->add("//[;]\n1;2;3");
+        $result = $stringCalculator->add("//[;;]\n1;;2;;3");
         $this->assertEquals(6, $result);
     }
 
@@ -118,5 +140,16 @@ final class StringCalculatorTest extends TestCase
 
         $result = $stringCalculator->add("//[**][%]\n1*2%3");
         $this->assertEquals(6, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function addWithMultipleDelimitersAndParameterHigherThan1000()
+    {
+        $stringCalculator = new StringCalculator();
+
+        $result = $stringCalculator->add("//[**][%]\n1**2000%3");
+        $this->assertEquals(4, $result);
     }
 }

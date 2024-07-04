@@ -40,6 +40,7 @@ class StringCalculator
         if ($this->isNegative($number)) {
             throw new RuntimeException('Number must be positive');
         }
+
         return ($number > 1000) ? 0 : $number;
     }
 
@@ -58,6 +59,7 @@ class StringCalculator
         foreach ($delimitersArray as $delimiter) {
             $parameters = str_replace($delimiter, ',', $parameters);
         }
+
         return $parameters;
     }
 
@@ -73,6 +75,7 @@ class StringCalculator
             }
             $total += ($number > 1000) ? 0 : $number;
         }
+
         return $total;
     }
 }
