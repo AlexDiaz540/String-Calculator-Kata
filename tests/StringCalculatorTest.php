@@ -131,4 +131,13 @@ final class StringCalculatorTest extends TestCase
         $result = $this->stringCalculator->add("//[**][%]\n1**2000%3");
         $this->assertEquals(4, $result);
     }
+
+    /**
+     * @test
+     */
+    public function throwsExceptionWithSpecialDelimitersAndNegativeNumbers(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->stringCalculator->add("//[*][%]\n1*2%3");
+    }
 }
