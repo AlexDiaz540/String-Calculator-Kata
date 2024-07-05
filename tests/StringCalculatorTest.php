@@ -138,6 +138,6 @@ final class StringCalculatorTest extends TestCase
     public function throwsExceptionWithSpecialDelimitersAndNegativeNumbers(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->stringCalculator->add("//[*][%]\n1*2%3");
+        $this->stringCalculator->add("//[**][%]\n1*2%-3");
     }
 }
