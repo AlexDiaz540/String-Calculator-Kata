@@ -18,7 +18,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWhenStringIsEmpty()
+    public function returnsZeroWithEmptyString(): void
     {
         $result = $this->stringCalculator->add("");
         $this->assertEquals(0, $result);
@@ -27,7 +27,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWhithOneParameter()
+    public function returnsNumberWithSingleNumber(): void
     {
         $result = $this->stringCalculator->add("1");
         $this->assertEquals(1, $result);
@@ -36,7 +36,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithTwoParameters()
+    public function returnsAddWithTwoNumbers(): void
     {
          $result = $this->stringCalculator->add("1,2");
          $this->assertEquals(3, $result);
@@ -45,7 +45,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithAnyParameters()
+    public function returnsAddWithMultipleNumbers(): void
     {
         $result = $this->stringCalculator->add("1,2,3");
         $this->assertEquals(6, $result);
@@ -54,7 +54,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithLineBreak()
+    public function returnsSumWhenNumbersContainLineBreaks()
     {
         $result = $this->stringCalculator->add("1\n2,3");
         $this->assertEquals(6, $result);
@@ -63,7 +63,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithDifferentDelimiters()
+    public function returnsSumWhenUsingDifferentDelimiters()
     {
         $result = $this->stringCalculator->add("//;\n1;2;3");
         $this->assertEquals(6, $result);
@@ -72,7 +72,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addShouldReciveExceptionWithOneNegativeParameter()
+    public function throwsExceptionWhenSingleNegativeNumberIsProvided()
     {
         $this->expectException(RuntimeException::class);
         $result = $this->stringCalculator->add("//;\n1;-2;3");
@@ -81,7 +81,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addShouldReciveExceptionWithAnyNegativesParameters()
+    public function throwsExceptionWhenMultipleNegativeNumbersAreProvided()
     {
         $this->expectException(RuntimeException::class);
         $result = $this->stringCalculator->add("//;\n1;-2;3");
@@ -90,7 +90,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithOneParameterHigherThan1000()
+    public function addWithOnenumberHigherThan1000()
     {
         $result = $this->stringCalculator->add("1001");
         $this->assertEquals(0, $result);
@@ -99,7 +99,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithParametersHigherThan1000()
+    public function ignoresNumbersGreaterThan1000()
     {
         $result = $this->stringCalculator->add("//;\n1;1001;3000");
         $this->assertEquals(1, $result);
@@ -108,7 +108,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithAnyLengthDelimiter()
+    public function ignoresNumbersGreaterThan1000InMultipleNumbers()
     {
         $result = $this->stringCalculator->add("//[;;]\n1;;2;;3");
         $this->assertEquals(6, $result);
@@ -117,7 +117,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithMultipleDelimiters()
+    public function supportsDelimitersOfAnyLength()
     {
         $result = $this->stringCalculator->add("//[**][%]\n1*2%3");
         $this->assertEquals(6, $result);
@@ -126,7 +126,7 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function addWithMultipleDelimitersAndParameterHigherThan1000()
+    public function supportsMultipleDelimiters()
     {
         $result = $this->stringCalculator->add("//[**][%]\n1**2000%3");
         $this->assertEquals(4, $result);
